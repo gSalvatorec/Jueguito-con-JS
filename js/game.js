@@ -21,15 +21,23 @@ function setCanvasSize(){
         elementsSize
     });
     console.groupEnd('CanvasSize');
-    elementsSize = canvasize/10;
+    elementsSize = canvasize/10-2;
     StartGame();
 }
 function StartGame(){
     console.log('Se ha cargado Correctamente el Load y StartGame')
     game.font=elementsSize+'px Arial';
     game.textAlign = 'end';
-    for(let i = 1 ; i<=10;i++){
-        game.fillText(emojis['X'],elementsSize*i,elementsSize);
-    }
-    
+    const map = maps[3];
+    const mapsRows = map.trim().split('\n');
+    const mapSeparate = mapsRows.map(row => row.trim().split(''));
+    mapSeparate.forEach((row, rowI)=>{
+        row.forEach((col,colI)=>{
+            const emoji = emojis[col];
+            const posX = elementsSize * (colI + 1);
+            const posY = elementsSize * (rowI + 1);
+            game.fillText(emoji,posX,posY);
+        })
+    })
+
 }
